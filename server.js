@@ -1,15 +1,22 @@
-const express = require('express')
-const app = express()
-const port = 3000
+// server.js
 
-app.get('/', (req, res) => {
-    const myAPI = [{
-        id: '1',
-        API: '/api/v1/product-details'
-    }]
-    res.send(myAPI);
-})
+const express = require("express");
+const authRoutes = require("./routes/authRoutes");
+const app = express();
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+// Middleware
+app.use(express.json());
+
+//App Home
+app.get("/api/v1/", (req, res) => {
+  res.send("Hello World!");
+});
+
+// Routes
+app.use("/api/v1/auth", authRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port http://localhost:${PORT}`);
+});

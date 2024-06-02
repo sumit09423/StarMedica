@@ -1,22 +1,21 @@
+// db/db.js
+
 const mysql = require('mysql');
-const config = require('./config');
+const { db } = require('./config');
 
-
-const DatabaseConnection = mysql.createConnection({
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.database
-
-})
-
-
-DatabaseConnection.connect((err) => {
-    if (err) {
-        console.log('Error Connecting to the DataBase', err.stack);
-        return;
-    }
-    console.log('Connected to the database as ID', DatabaseConnection.threadId);
+const connection = mysql.createConnection({
+  host: db.host,
+  user: db.user,
+  password: db.password,
+  database: db.database,
 });
 
-module.exports = DatabaseConnection;
+connection.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  }
+  console.log('Connected to the database');
+});
+
+module.exports = connection;
