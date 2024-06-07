@@ -1,6 +1,6 @@
 // controllers/authController.js
 
-const Doctor = require("../Models/Doctor");
+const Doctor = require("../db/models/Doctor");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
